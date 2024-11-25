@@ -1,0 +1,38 @@
+@Endpoint = http://localhost:5068
+
+GET {{Endpoint}}/weatherforecast/
+Accept: application/json
+
+### Test Public Endpoint (No Authorization Required)
+GET {{Endpoint}}/user
+Accept: application/json
+
+###
+
+### Test Get User by ID (Cookie Authentication)
+GET {{Endpoint}}/user/1
+Accept: application/json
+Authorization: Cookie
+Cookie: MyAppCookie=YourCookieValue
+
+###
+
+### Test Get User by Name (Session ID Authentication)
+GET {{Endpoint}}/user/admin
+Accept: application/json
+Authorization: Id
+
+###
+
+### Test Update User by Name (JWT Authentication - Default)
+POST {{Endpoint}}/user/admin
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer YourJWTToken
+
+{
+  "exampleProperty": "exampleValue"
+}
+
+###
+###

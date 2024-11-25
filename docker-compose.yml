@@ -1,0 +1,6 @@
+﻿services:
+  endpoint.api:
+    image: endpoint.api
+    build:
+      context: .
+      dockerfile: src/Endpoint.Api/Dockerfile

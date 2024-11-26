@@ -9,6 +9,10 @@ namespace Endpoint.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        /// <summary>
+        /// Test login method which creates cookie in the response
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("auth/login")]
         public async Task<IActionResult> Login()
@@ -29,6 +33,10 @@ namespace Endpoint.Api.Controllers
             return Ok(new { Message = "Cookie generated successfully!" });
         }
         
+        /// <summary>
+        /// Test Anonymous attribute
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("/user")]
         public async Task<IActionResult> GetUserAsync()
@@ -36,7 +44,12 @@ namespace Endpoint.Api.Controllers
             await Task.CompletedTask;
             return Ok(new { UserName = "admin", Email = "admin@admin.com" });
         }
-
+        
+        /// <summary>
+        /// Test CookieOnly access
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Authorize(Policy = "CookieOnly")]
         [HttpGet("/user/{id:int}")]
         public async Task<IActionResult> GetUserByIdAsync(int id)
@@ -45,6 +58,11 @@ namespace Endpoint.Api.Controllers
             return Ok(new { id, UserName = "admin", Email = "admin@admin.com" });
         }
 
+        /// <summary>
+        /// Test session id authorization
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [Authorize(AuthenticationSchemes = "SessionId")]
         [HttpGet("/user/{name}")]
         public async Task<IActionResult> GetUserByNameAsync(string name)
@@ -53,6 +71,11 @@ namespace Endpoint.Api.Controllers
             return Ok(new { name, UserName = "admin", Email = "admin@admin.com" });
         }
 
+        /// <summary>
+        /// Test global authorize if functioning as expected.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost("/user/{name}")]
         public async Task<IActionResult> UpdateUserByNameAsync(string name)
         {

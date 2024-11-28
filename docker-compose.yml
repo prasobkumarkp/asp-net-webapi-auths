@@ -4,3 +4,9 @@
     build:
       context: .
       dockerfile: src/Endpoint.Api/Dockerfile
+
+  endpoint.api-1:
+    image: endpoint.api-1
+    build:
+      context: .
+      dockerfile: src/Endpoint.Api/Dockerfile
